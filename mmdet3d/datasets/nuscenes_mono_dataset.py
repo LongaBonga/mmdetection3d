@@ -83,6 +83,10 @@ class NuScenesMonoDataset(CocoDataset):
                  **kwargs):
         super().__init__(**kwargs)
         self.data_root = data_root
+        print('################################################')
+        print(data_root)
+        
+        print('################################################')
         self.load_interval = load_interval
         self.with_velocity = with_velocity
         self.modality = modality
