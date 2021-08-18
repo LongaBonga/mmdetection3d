@@ -81,12 +81,14 @@ class NuScenesMonoDataset(CocoDataset):
                  use_valid_flag=False,
                  version='v1.0-trainval',
                  **kwargs):
-        super().__init__(**kwargs)
-        self.data_root = data_root
+
         print('################################################')
         print(data_root)
         
         print('################################################')
+        super().__init__(**kwargs)
+        self.data_root = data_root
+        
         self.load_interval = load_interval
         self.with_velocity = with_velocity
         self.modality = modality
