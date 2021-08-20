@@ -68,7 +68,7 @@ def generate_backbones():
                             m.eval()
 
             class custom_model_getter(nn.Module):
-                def __init__(self, *args, out_indices=None, frozen_stages=0, norm_eval=False, verbose=False, **kwargs):
+                def __init__(self, *args, out_indices=None, frozen_stages=0, norm_eval=False, verbose=True, **kwargs):
                     super().__init__()
                     if 'pretrained' in kwargs and kwargs['pretrained']:
                         rank, _ = get_dist_info()
