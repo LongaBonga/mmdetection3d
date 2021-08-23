@@ -141,7 +141,7 @@ class CameraInstance3DBoxes(BaseInstance3DBoxes):
             corners = dims.view([-1, 1, 3]) * corners_norm.reshape([1, 8, 3])
 
             # rotate around y axis
-            corners = rotation_3d_in_axis(corners, self.tensor[:, 6], axis=1)
+#             corners = rotation_3d_in_axis(corners, self.tensor[:, 6], axis=1)
             corners += self.tensor[:, :3].view(-1, 1, 3)
             print(corners)
             return corners
