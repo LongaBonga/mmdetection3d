@@ -72,8 +72,8 @@ def xywhr2xyxyr(boxes_xywhr):
         torch.Tensor: Converted boxes in XYXYR format.
     """
     boxes = torch.zeros_like(boxes_xywhr)
-    half_w = boxes_xywhr[:, 2] / 2
-    half_h = boxes_xywhr[:, 3] / 2
+    half_h = boxes_xywhr[:, 2] / 2
+    half_w = boxes_xywhr[:, 3] / 2
 
     boxes[:, 0] = boxes_xywhr[:, 0] - half_w
     boxes[:, 1] = boxes_xywhr[:, 1] - half_h
