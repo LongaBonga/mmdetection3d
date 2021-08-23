@@ -70,8 +70,8 @@ model = dict(
         use_rotate_nms=True,
         nms_across_levels=False,
         nms_pre=1000,
-        nms_thr=0.8,
-        score_thr=0.05,
+        nms_thr=0.25,
+        score_thr=0.8,
         min_bbox_size=0,
         max_per_img=200))
 
