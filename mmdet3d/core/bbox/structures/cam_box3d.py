@@ -125,23 +125,27 @@ class CameraInstance3DBoxes(BaseInstance3DBoxes):
         """
         # TODO: rotation_3d_in_axis function do not support
         #  empty tensor currently.
-        assert len(self.tensor) != 0
-        dims = self.dims
-        corners_norm = torch.from_numpy(
-            np.stack(np.unravel_index(np.arange(8), [2] * 3), axis=1)).to(
-                device=dims.device, dtype=dims.dtype)
+        if len(self.tensor) == 0:
+            corners = torch.zeros([1, 1, 8, 3], dtype=torch.int32)
+            return corners
+        else:
+#         assert len(self.tensor) != 0
+            dims = self.dims
+            corners_norm = torch.from_numpy(
+                np.stack(np.unravel_index(np.arange(8), [2] * 3), axis=1)).to(
+                    device=dims.device, dtype=dims.dtype)
 
-        corners_norm = corners_norm[[0, 1, 3, 2, 4, 5, 7, 6]]
-        # use relative origin [0.5, 1, 0.5]
-        corners_norm = corners_norm - dims.new_tensor([0.5, 1, 0.5])
-        corners = dims.view([-1, 1, 3]) * corners_norm.reshape([1, 8, 3])
+            corners_norm = corners_norm[[0, 1, 3, 2, 4, 5, 7, 6]]
+            # use relative origin [0.5, 1, 0.5]
+            corners_norm = corners_norm - dims.new_tensor([0.5, 1, 0.5])
+            corners = dims.view([-1, 1, 3]) * corners_norm.reshape([1, 8, 3])
 
-        # rotate around y axis
-        corners = rotation_3d_in_axis(corners, self.tensor[:, 6], axis=1)
-        corners = rotation_3d_in_axis(corners, self.tensor[:, 6], axis=2)
-        corners += self.tensor[:, :3].view(-1, 1, 3)
-        print(corners)
-        return corners
+            # rotate around y axis
+            corners = rotation_3d_in_axis(corners, self.tensor[:, 6], axis=1)
+            corners = rotation_3d_in_axis(corners, self.tensor[:, 6], axis=2)
+            corners += self.tensor[:, :3].view(-1, 1, 3)
+            print(corners)
+            return corners
 
     @property
     def bev(self):
