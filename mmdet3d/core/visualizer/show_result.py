@@ -241,18 +241,18 @@ def show_multi_modality_result(img,
     result_path = osp.join(out_dir, filename)
     mmcv.mkdir_or_exist(result_path)
 
-    if show:
-        show_img = img.copy()
-        if gt_bboxes is not None:
-            show_img = draw_bbox(
-                gt_bboxes, show_img, proj_mat, img_metas, color=gt_bbox_color)
-        if pred_bboxes is not None:
-            show_img = draw_bbox(
-                pred_bboxes,
-                show_img,
-                proj_mat,
-                img_metas,
-                color=pred_bbox_color)
+#     if show:
+#         show_img = img.copy()
+#         if gt_bboxes is not None:
+#             show_img = draw_bbox(
+#                 gt_bboxes, show_img, proj_mat, img_metas, color=gt_bbox_color)
+#         if pred_bboxes is not None:
+#             show_img = draw_bbox(
+#                 pred_bboxes,
+#                 show_img,
+#                 proj_mat,
+#                 img_metas,
+#                 color=pred_bbox_color)
 #         mmcv.imshow(show_img, win_name='project_bbox3d_img', wait_time=0)
 
     if img is not None:
